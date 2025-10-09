@@ -26,7 +26,18 @@ int main() {
 
     //test
     Perceptron<float> test;
+    test.print_performance(test_data);
+    std::cout << "TRAINING TESTS" << "\n";
+    test.train(training_data, 1);
     test.print_performance(training_data);
+    test.train(training_data, 1);
+    test.print_performance(training_data);
+    test.train(training_data, 1);
+    test.print_performance(training_data);
+    test.train(training_data, 1);
+    test.print_performance(training_data);
+    std::cout << "FINAL PERFORMANCE" << "\n";
+    test.print_performance(test_data);
     
     return 0;
 }

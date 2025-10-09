@@ -13,6 +13,7 @@ class Perceptron {
     Perceptron();
     int simulate_perceptron(const data_entry<T>& data);
     void print_performance(const std::vector<data_entry<T>>& data_set);
+    void train(const std::vector<data_entry<T>>& data_set, int epochs);
 
 };
 
