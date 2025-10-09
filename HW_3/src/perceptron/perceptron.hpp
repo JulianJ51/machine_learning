@@ -2,12 +2,26 @@ template <typename T>
 Perceptron<T>::Perceptron() {
     std::random_device rd;
     std::mt19937 gen(std::random_device{}());
-    std::uniform_real_distribution<float> dist(-0.5f, 0.5f);
+    std::uniform_real_distribution<float> dist(-1.2f, 1.2f);
     for(auto &w : weights) {
         w = dist(gen);
     }
     bias = 1;
     learning_rate = 0.1;
+    target = 0;
+}
+
+template <typename T>
+Perceptron<T>::Perceptron(int target) {
+    std::random_device rd;
+    std::mt19937 gen(std::random_device{}());
+    std::uniform_real_distribution<float> dist(-0.5f, 0.5f);
+    for(auto &w : weights) {
+        w = dist(gen);
+    }
+    bias = 1;
+    learning_rate = 0.25;
+    this -> target = target;
 }
 
 
@@ -40,20 +54,77 @@ void Perceptron<T>::print_performance(const std::vector<data_entry<T>>& data_set
     double true_neg = 0;
     double false_pos = 0;
     double false_neg = 0;
+    /*
+    int zero1 = 0;
+    int zero2 = 0;
+    int zero3 = 0;
+    int zero4 = 0;
+    int zero5 = 0;
+    int zero6 = 0;
+    int zero7 = 0;
+    int zero8 = 0;
+    int nine1 = 0;
+    int nine2 = 0;
+    int nine3 = 0;
+    int nine4 = 0;
+    int nine5 = 0;
+    int nine6 = 0;
+    int nine7 = 0;
+    int nine8 = 0;
+    */
+
     for(int i = 0; i < data_set.size(); i++) {
         perceptron_output = simulate_perceptron(data_set[i]);
-        if((perceptron_output == 1 && data_set[i].label == 9)) {
+        if((perceptron_output == 1 && data_set[i].label == target)) {
             true_pos++;
         }
-        else if((perceptron_output == 0) && data_set[i].label == 0) {
+        else if((perceptron_output == 0) && data_set[i].label != target) {
             true_neg++;
         }
-        else if((perceptron_output == 1) && data_set[i].label == 0) {
+        else if((perceptron_output == 1) && data_set[i].label != target) {
             false_pos++;
         }
-        else if((perceptron_output == 0) && data_set[i].label == 9) {
+        else if((perceptron_output == 0) && data_set[i].label == target) {
             false_neg++;
         }
+        /*
+        if(perceptron_output == 0) {
+            if(data_set[i].label == 1)
+                zero1++;
+            else if(data_set[i].label == 2)
+                zero2++;
+            else if(data_set[i].label == 3)
+                zero3++;
+            else if(data_set[i].label == 4)
+                zero4++;
+            else if(data_set[i].label == 5)
+                zero5++;
+            else if(data_set[i].label == 6)
+                zero6++;
+            else if(data_set[i].label == 7)
+                zero7++;
+            else if(data_set[i].label == 8)
+                zero8++;
+        }
+        else if(perceptron_output == 1) {
+            if(data_set[i].label == 1)
+                nine1++;
+            else if(data_set[i].label == 2)
+                nine2++;
+            else if(data_set[i].label == 3)
+                nine3++;
+            else if(data_set[i].label == 4)
+                nine4++;
+            else if(data_set[i].label == 5)
+                nine5++;
+            else if(data_set[i].label == 6)
+                nine6++;
+            else if(data_set[i].label == 7)
+                nine7++;
+            else if(data_set[i].label == 8)
+                nine8++;
+        }
+        */
     }
     std::cout << true_pos << " " << true_neg << " " << false_pos << " " << false_neg << "\n";
     error_fraction = (false_neg + false_pos) / data_set.size();
@@ -64,22 +135,37 @@ void Perceptron<T>::print_performance(const std::vector<data_entry<T>>& data_set
     std::cout << "The precision is: " << precision << "\n";
     std::cout << "The recall is: " << recall << "\n";
     std::cout << "The f1 score is: " << f1 << "\n";
+    /*
+    std::cout << "0: " << zero1 << " " << zero2 << " " << zero3 << " " << zero4 << " " << zero5 << " " << zero6 << " " << zero7 << " " << zero8 << "\n";
+    std::cout << "9: " << nine1 << " " << nine2 << " " << nine3 << " " << nine4 << " " << nine5 << " " << nine6 << " " << nine7 << " " << nine8 << "\n";
+    */
     return;
 }
 
 template <typename T>
 void Perceptron<T>::train(const std::vector<data_entry<T>>& data_set, int epochs) {
     int perceptron_output = 0;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::bernoulli_distribution coin_flip(0.5);
+    int test_counter = 0;
+
     for(int i = 0; i < epochs; i++) {
         for(int j = 0; j < data_set.size(); j++) {
-            int target = (data_set[j].label == 9) ? 1 : 0;
+            int comp = (data_set[j].label == target) ? 1 : 0;
+            if(comp == 1 && coin_flip(gen)) {
+                test_counter++;
+                continue;
+            }
+            
             perceptron_output = simulate_perceptron(data_set[j]);
             for(int k = 0; k < data_set[j].pixels.size(); k++) {
-                weights[k] = weights[k] + (learning_rate * (target - perceptron_output)) * data_set[j].pixels[k];
+                weights[k] = weights[k] + (learning_rate * (comp - perceptron_output)) * data_set[j].pixels[k];
             }
-            weights[784] = weights[784] + (learning_rate * (target - perceptron_output));
+            weights[784] = weights[784] + (learning_rate * (comp - perceptron_output));
         }
     }
+    std::cout << test_counter << "\n";
     return;
 }
 

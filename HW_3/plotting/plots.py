@@ -4,8 +4,8 @@ from matplotlib.ticker import MaxNLocator
 
 #Error Fraction During Training Plot
 
-x = np.array([1,2,3,4])
-y = np.array([0.0275,0.01875,0.00125,0.00125]) #input correct values later
+x = np.array([1,2,3])
+y = np.array([0.00625,0.00625,0.00375]) #input correct values later
 
 plt.scatter(x,y, label='Error at Epoch')
 plt.plot(x,y,label='Training Curve')
@@ -25,8 +25,8 @@ plt.show()
 #replace with correct values later
 metrics = ("Error Fraction", "Precision", "Recall", "F1 Score")
 performance = {
-    'Before': (0.58, 0.45, 0.7, 0.55),
-    'After': (0.01, 0.99, 0.99, 0.99),
+    'Before': (0.595, 0.268293, 0.11, 0.156028),
+    'After': (0.005, 1, 0.99, 0.994975),
 }
 
 x = np.arange(len(metrics))
