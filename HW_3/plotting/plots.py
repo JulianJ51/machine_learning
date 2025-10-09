@@ -61,4 +61,25 @@ ax.set_ylim(0, 1)
 
 plt.show()
 
+#Heat map plots
+heat_maps_combined = np.loadtxt("../heatmap.txt")
+heat_maps = np.array_split(heat_maps_combined, 2)
+
+fig, ax = plt.subplots()
+im = ax.imshow(heat_maps[0], cmap = 'viridis')
+cbar = fig.colorbar(im, ax=ax) 
+cbar.set_label("Weight Value")   
+
+ax.set_title("Weights Before Training")
+fig.tight_layout()
+plt.show()
+
+fig, ax = plt.subplots()
+im = ax.imshow(heat_maps[1], cmap='viridis')
+cbar = fig.colorbar(im, ax=ax)  
+cbar.set_label("Weight Value")  
+
+ax.set_title("Weights After Training")
+fig.tight_layout()
+plt.show()
 

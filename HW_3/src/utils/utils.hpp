@@ -51,13 +51,6 @@ std::vector<data_entry<T>> generate_data(std::string label_filename, std::string
             while(iss >> value) {
                 pixels.push_back(value);
             }
-            /*
-            std::vector<std::vector<T>> heat_map(28, std::vector<T>(28));
-            for(int i = 0; i < 28; i++) {
-                for(int j = 0; j < 28; j++) {
-                    heat_map[i][j] = pixels[i*28+j];
-                }
-            }*/
             dataset.push_back({it -> second, pixels});
         }
         current_index++;

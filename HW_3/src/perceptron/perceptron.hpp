@@ -82,3 +82,22 @@ void Perceptron<T>::train(const std::vector<data_entry<T>>& data_set, int epochs
     }
     return;
 }
+
+template <typename T>
+void Perceptron<T>::output_heatmap() {
+    std::ofstream outfile;
+
+    outfile.open("heatmap.txt", std::ios::app);
+
+    if(!outfile.is_open()) {
+        std::cerr << "File I/O error" << "\n";
+        return;
+    }
+    std::vector<std::vector<T>> heat_map(28, std::vector<T>(28));
+    for(int i = 0; i < 28; i++) {
+        for(int j = 0; j < 28; j++) {
+            outfile << weights[i*28+j] << " ";
+        }
+        outfile << "\n";
+    }
+}
