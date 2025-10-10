@@ -14,7 +14,6 @@ int main() {
     get_labels(LABEL_FILE_PATH, "training_data.txt", 4000, 4500);
     get_labels(LABEL_FILE_PATH, "training_data.txt", 4500, 4900);
     std::vector<data_entry<float>> training_data = generate_data<float>("training_data.txt", IMG_FILE_PATH);
-    shuffle_data(training_data);
 
     //generate test data
     get_labels(LABEL_FILE_PATH, "test_data.txt", 400, 500);
@@ -41,48 +40,64 @@ int main() {
     get_labels(LABEL_FILE_PATH, "challenge_data.txt", 4000, 4100);
     std::vector<data_entry<float>> challenge_data = generate_data<float>("challenge_data.txt", IMG_FILE_PATH);
 */
-    /*
     Perceptron<float> zero_perceptron(0);
-    zero_perceptron.train(training_data, 5);
+    std::cout << "Perceptron 0:\n";
+    zero_perceptron.print_performance(test_data);
+    zero_perceptron.train_with_error_output(training_data, 50, "0error.txt");
     zero_perceptron.print_performance(test_data);
 
     Perceptron<float> one_perceptron(1);
-    one_perceptron.train(training_data, 5);
+    std::cout << "Perceptron 1:\n";
+    one_perceptron.print_performance(test_data);
+    one_perceptron.train_with_error_output(training_data, 50, "1error.txt");
     one_perceptron.print_performance(test_data);
 
     Perceptron<float> two_perceptron(2);
-    two_perceptron.train(training_data, 5);
+    std::cout << "Perceptron 2:\n";
+    two_perceptron.print_performance(test_data);
+    two_perceptron.train_with_error_output(training_data, 50, "2error.txt");
     two_perceptron.print_performance(test_data);
 
     Perceptron<float> three_perceptron(3);
-    three_perceptron.train(training_data, 5);
+    std::cout << "Perceptron 3:\n";
+    three_perceptron.print_performance(test_data);
+    three_perceptron.train_with_error_output(training_data, 50, "3error.txt");
     three_perceptron.print_performance(test_data);
     
     Perceptron<float> four_perceptron(4);
-    four_perceptron.train(training_data, 5);
+    std::cout << "Perceptron 4:\n";
+    four_perceptron.print_performance(test_data);
+    four_perceptron.train_with_error_output(training_data, 50, "4error.txt");
     four_perceptron.print_performance(test_data);
 
     Perceptron<float> five_perceptron(5);
-    five_perceptron.train(training_data, 5);
+    std::cout << "Perceptron 5:\n";
+    five_perceptron.print_performance(test_data);
+    five_perceptron.train_with_error_output(training_data, 50, "5error.txt");
     five_perceptron.print_performance(test_data);
 
     Perceptron<float> six_perceptron(6);
-    six_perceptron.train(training_data, 5);
+    std::cout << "Perceptron 6:\n";
+    six_perceptron.print_performance(test_data);
+    six_perceptron.train_with_error_output(training_data, 50, "6error.txt");
     six_perceptron.print_performance(test_data);
 
     Perceptron<float> seven_perceptron(7);
-    seven_perceptron.train(training_data, 5);
+    std::cout << "Perceptron 7:\n";
+    seven_perceptron.print_performance(test_data);
+    seven_perceptron.train_with_error_output(training_data, 50, "7error.txt");
     seven_perceptron.print_performance(test_data);
 
     Perceptron<float> eight_perceptron(8);
-    eight_perceptron.train(training_data, 5);
+    std::cout << "Perceptron 8:\n";
+    eight_perceptron.print_performance(test_data);
+    eight_perceptron.train_with_error_output(training_data, 50, "8error.txt");
     eight_perceptron.print_performance(test_data);
 
-    */
-
     Perceptron<float> nine_perceptron(9);
-    nine_perceptron.train(training_data, 1);
-    nine_perceptron.print_performance(training_data);
+    std::cout << "Perceptron 9:\n";
+    nine_perceptron.print_performance(test_data);
+    nine_perceptron.train_with_error_output(training_data, 50, "9error.txt");
     nine_perceptron.print_performance(test_data);
 
     return 0;

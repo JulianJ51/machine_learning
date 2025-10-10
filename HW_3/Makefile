@@ -40,7 +40,7 @@ $(BUILD_DIR):
 	@mkdir -p $(BUILD_DIR)
 
 # Clean build artifacts
-CLEAN_FILES := challenge_data.txt test_data.txt training_data.txt heatmap.txt
+CLEAN_FILES := challenge_data.txt test_data.txt training_data.txt heatmap.txt *error.txt 
 
 clean:
 	@echo "Cleaning..."
