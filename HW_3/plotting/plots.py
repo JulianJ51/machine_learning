@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np 
 from matplotlib.ticker import MaxNLocator
 
+'''
+
 #Error Fraction During Training Plot
 
 x = np.array([1,2,3])
@@ -83,3 +85,32 @@ ax.set_title("Weights After Training")
 fig.tight_layout()
 plt.show()
 
+'''
+
+#errors during training for 0-9 perceptrons
+x = np.arange(1,51)
+y0 = np.loadtxt("../0error.txt")
+y1 = np.loadtxt("../1error.txt")
+y2 = np.loadtxt("../2error.txt")
+y3 = np.loadtxt("../3error.txt")
+y4 = np.loadtxt("../4error.txt")
+y5 = np.loadtxt("../5error.txt")
+y6 = np.loadtxt("../6error.txt")
+y7 = np.loadtxt("../7error.txt")
+y8 = np.loadtxt("../8error.txt")
+y9 = np.loadtxt("../9error.txt")
+
+ys = [y0, y1, y2, y3, y4, y5, y6, y7, y8, y9]
+
+for i, y in enumerate(ys):
+    plt.scatter(x, y)
+    plt.plot(x, y, label=f'Training Curve {i}')
+
+plt.xlabel('Epoch')
+plt.ylabel('Balanced Error')
+plt.title('Training Curves for each Perceptron')
+plt.legend()
+
+plt.grid()
+plt.tight_layout()
+plt.show()
