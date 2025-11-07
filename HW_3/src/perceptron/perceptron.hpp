@@ -176,10 +176,10 @@ void Perceptron<T>::train(std::vector<data_entry<T>>& data_set, int epochs) {
 }
 
 template <typename T>
-void Perceptron<T>::output_heatmap() {
+void Perceptron<T>::output_heatmap(std::string outfilename) {
     std::ofstream outfile;
 
-    outfile.open("heatmap.txt", std::ios::app);
+    outfile.open(outfilename, std::ios::app);
 
     if(!outfile.is_open()) {
         std::cerr << "File I/O error" << "\n";
