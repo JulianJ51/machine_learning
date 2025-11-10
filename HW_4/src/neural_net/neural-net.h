@@ -16,6 +16,7 @@ class neural_net {
         neural_net();
         neural_net(int num_of_hidden_layers, int neurons_per_layer);
         int simulate_neural_network(const data_entry<T>& data);
+        void train(std::vector<data_entry<T>>&, int epochs);
 
 };
 

@@ -26,6 +26,11 @@ neural_net<T>::neural_net(int num_of_hidden_layers, int neurons_per_layer) {
     }
 }
 
+template<typename T>
+void neural_net<T>::train(std::vector<data_entry<T>>&, int epochs) {
+    
+}
+
 template <typename T>
 int neural_net<T>::simulate_neural_network(const data_entry<T>& data) {
     std::vector<double> current_layer(neurons_per_layer);
@@ -60,7 +65,7 @@ int neural_net<T>::simulate_neural_network(const data_entry<T>& data) {
         raw_output[i] = sigmoid_activation(sum);
     }
     //
-    auto max_it = std::max_element(raw_output.begin() raw_output.end());
+    auto max_it = std::max_element(raw_output.begin(), raw_output.end());
     int output = std::distance(raw_output.begin(), max_it);
     return output;
 }
