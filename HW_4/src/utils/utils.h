@@ -9,6 +9,7 @@
 #include <random>
 #include <algorithm>
 #include <cmath>
+#include <iterator>
 
 #define LABEL_FILE_PATH "HW3_datafiles/MNISTnumLabels5000_balanced.txt"
 #define IMG_FILE_PATH "HW3_datafiles/MNISTnumImages5000_balanced.txt"

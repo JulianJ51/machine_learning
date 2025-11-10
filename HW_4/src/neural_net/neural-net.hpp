@@ -59,6 +59,10 @@ int neural_net<T>::simulate_neural_network(const data_entry<T>& data) {
         }
         raw_output[i] = sigmoid_activation(sum);
     }
+    //
+    auto max_it = std::max_element(raw_output.begin() raw_output.end());
+    int output = std::distance(raw_output.begin(), max_it);
+    return output;
 }
 
 
