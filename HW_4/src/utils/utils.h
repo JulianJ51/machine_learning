@@ -8,6 +8,7 @@
 #include <sstream>
 #include <random>
 #include <algorithm>
+#include <cmath>
 
 #define LABEL_FILE_PATH "HW3_datafiles/MNISTnumLabels5000_balanced.txt"
 #define IMG_FILE_PATH "HW3_datafiles/MNISTnumImages5000_balanced.txt"
@@ -36,5 +37,9 @@ void dump_heat_maps(const std::vector<data_entry<T>>& data_set);
 
 template <typename T>
 void dump_1Dvec(const std::vector<T>& vec);
+
+double sigmoid_activation(double u);
+
+double tanh(double u);
 
 #include "utils.hpp"

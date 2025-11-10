@@ -90,3 +90,11 @@ void dump_1Dvec(const std::vector<T>& vec) {
     }
     return;
 }
+
+double sigmoid_activation(double u) {
+    return 1 / (1 + exp(u));
+}
+
+double tanh(double u) {
+    return ((exp(u) - exp(-u)) / exp(u) + exp(-u));
+}
