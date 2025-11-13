@@ -2,6 +2,7 @@ template <typename T>
 neural_net<T>::neural_net() {
     num_of_hidden_layers = 1;
     neurons_per_layer = 100;
+    learning_rate = 0.01;
     int num_of_weights = (NUM_OF_PIXELS * neurons_per_layer) + ((neurons_per_layer * neurons_per_layer) * num_of_hidden_layers) + (neurons_per_layer * NUM_OF_OUTPUTS);
     weights.resize(num_of_weights);
     std::random_device rd;
@@ -16,6 +17,7 @@ template<typename T>
 neural_net<T>::neural_net(int num_of_hidden_layers, int neurons_per_layer) {
     this -> num_of_hidden_layers = num_of_hidden_layers;
     this -> neurons_per_layer = neurons_per_layer;
+    this -> learning_rate = learning_rate;
     int num_of_weights = (NUM_OF_PIXELS * neurons_per_layer) + ((neurons_per_layer * neurons_per_layer) * num_of_hidden_layers) + (neurons_per_layer * NUM_OF_OUTPUTS);
     weights.resize(num_of_weights);
     std::random_device rd;
@@ -28,7 +30,7 @@ neural_net<T>::neural_net(int num_of_hidden_layers, int neurons_per_layer) {
 
 template<typename T>
 void neural_net<T>::train(std::vector<data_entry<T>>&, int epochs) {
-    
+
 }
 
 template <typename T>

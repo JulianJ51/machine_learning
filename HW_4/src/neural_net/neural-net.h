@@ -10,11 +10,12 @@ class neural_net {
     private:
         int num_of_hidden_layers;
         int neurons_per_layer;
+        double learning_rate;
         std::vector<T> weights;
         
     public:
         neural_net();
-        neural_net(int num_of_hidden_layers, int neurons_per_layer);
+        neural_net(int num_of_hidden_layers, int neurons_per_layer, double learning_rate);
         int simulate_neural_network(const data_entry<T>& data);
         void train(std::vector<data_entry<T>>&, int epochs);
 
