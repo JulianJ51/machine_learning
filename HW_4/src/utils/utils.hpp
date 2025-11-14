@@ -95,6 +95,14 @@ double sigmoid_activation(double u) {
     return 1 / (1 + exp(u));
 }
 
+double sigmoid_derivative(double u) {
+    return (exp(-u) / (pow(1 + exp(-u), 2)));
+}
+
+double tanh_derivative(double i) {
+    return (1 - pow(tanh(u), 2));
+}
+
 double tanh(double u) {
     return ((exp(u) - exp(-u)) / exp(u) + exp(-u));
 }

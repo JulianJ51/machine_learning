@@ -41,6 +41,10 @@ void dump_1Dvec(const std::vector<T>& vec);
 
 double sigmoid_activation(double u);
 
+double sigmoid_derivative(double u);
+
+double tanh_derivative(double u);
+
 double tanh(double u);
 
 #include "utils.hpp"

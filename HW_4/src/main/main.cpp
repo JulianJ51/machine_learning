@@ -28,6 +28,6 @@ int main() {
     get_labels(LABEL_FILE_PATH, "test_data.txt", 4900, 5000);
     std::vector<data_entry<double>> test_data = generate_data<double>("test_data.txt", IMG_FILE_PATH);
 
-    neural_net<double> neural_network(1, 100);
+    neural_net<double> neural_network(1, 100, 0.01);
     std::cout << neural_network.simulate_neural_network(test_data[0]);
 }
