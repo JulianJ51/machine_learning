@@ -29,5 +29,6 @@ int main() {
     std::vector<data_entry<double>> test_data = generate_data<double>("test_data.txt", IMG_FILE_PATH);
 
     neural_net<double> neural_network(1, 100, 0.01);
-    std::cout << neural_network.simulate_neural_network(test_data[0]);
+    neural_network.train(training_data, 100);
+    std::cout << neural_network.simulate_neural_network(test_data[400]);
 }

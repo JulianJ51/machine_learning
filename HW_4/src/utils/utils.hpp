@@ -99,7 +99,7 @@ double sigmoid_derivative(double u) {
     return (exp(-u) / (pow(1 + exp(-u), 2)));
 }
 
-double tanh_derivative(double i) {
+double tanh_derivative(double u) {
     return (1 - pow(tanh(u), 2));
 }
 
