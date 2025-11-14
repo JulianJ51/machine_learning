@@ -11,7 +11,7 @@ class neural_net {
         int num_of_hidden_layers;
         int neurons_per_layer;
         double learning_rate;
-        std::vector<T> weights;
+        std::vector<std::vector<std::vector<T>>> weights;
         
     public:
         neural_net();
