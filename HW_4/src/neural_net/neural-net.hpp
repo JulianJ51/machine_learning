@@ -86,22 +86,21 @@ void neural_net<T>::train(std::vector<data_entry<T>>& data_set, int epochs) {
             }
             output_index--;
         }
-        //step 2.2: calculate final hidden layer output error + weight updates
+        //step 2.2: TODO: calculate internal weight updates.
+        //step 2.3: calculate input -> hidden layer weight updates
         for(int i = 0; i < neurons_per_layer; i++) {
             double sum = 0.0;
-            error_index = size - 1;
-            weight_error_index = weights.size() - 1 - (NUM_OF_OUTPUTS * i);
-            for(int j = 0; j < NUM_OF_OUTPUTS; j++) {
+            error_index = size - 1 - (neurons_per_layer * (num_of_hidden_layers - 1)) - NUM_OF_OUTPUTS;
+            weight_error_index = weights.size() - 1 - (neurons_per_layer * NUM_OF_OUTPUTS) - ((neurons_per_layer * neurons_per_layer) * (num_of_hidden_layers - 1)) - (neurons_per_layer * i);
+            for(int j = 0; j < neurons_per_layer; j++) {
                 sum += output_errors[error_index - j] * weights[weight_error_index - j];
             }
             output_errors[output_index] = tanh_derivative(non_activated_outputs[output_index]) * sum;
-            for(int k = 0; k < neurons_per_layer; k++) {
-                weights[weight_index--] += (learning_rate * output_errors[output_index]) * outputs[output_index - neurons_per_layer - k];
+            for(int k = data_point.pixels.size()-1; k >= 0; k--) {
+                weights[weight_index--] += (learning_rate * output_errors[output_index]) * data_point.pixels[k];
             }
+            output_index--;
         }
-        //step 2.3: TODO: calculate internal weight updates.
-        //step 2.4: calculate input -> hidden layer weight updates
-        
     }
 }
 
