@@ -11,7 +11,7 @@ int main() {
     get_labels(LABEL_FILE_PATH, "training_data.txt", 2500, 2900);
     get_labels(LABEL_FILE_PATH, "training_data.txt", 3000, 3400);
     get_labels(LABEL_FILE_PATH, "training_data.txt", 3500, 3900);
-    get_labels(LABEL_FILE_PATH, "training_data.txt", 4000, 4500);
+    get_labels(LABEL_FILE_PATH, "training_data.txt", 4000, 4400);
     get_labels(LABEL_FILE_PATH, "training_data.txt", 4500, 4900);
     std::vector<data_entry<double>> training_data = generate_data<double>("training_data.txt", IMG_FILE_PATH);
 
@@ -28,9 +28,14 @@ int main() {
     get_labels(LABEL_FILE_PATH, "test_data.txt", 4900, 5000);
     std::vector<data_entry<double>> test_data = generate_data<double>("test_data.txt", IMG_FILE_PATH);
 
-    neural_net<double> neural_network(1, 200, 0.01);
-    neural_network.train(training_data, 20);
-    for(int i = 0; i < test_data.size(); i++) {
-        std::cout << neural_network.simulate_neural_network(test_data[i]);
+    neural_net<double> neural_network(1, 150, 0.003, 0.5, 10);
+    neural_network.print_performance(test_data);
+    for(int i = 0; i < 10; i++) {
+        shuffle_data(training_data);
+        neural_network.train(training_data, 10);
+        neural_network.print_performance(test_data);
     }
+    neural_network.save_weights();
+    neural_network.generate_confusion_matrix(training_data);
+    neural_network.generate_confusion_matrix(test_data);
 }

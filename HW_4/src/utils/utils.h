@@ -11,6 +11,8 @@
 #include <cmath>
 #include <iterator>
 #include <math.h>
+#include <ctime>
+#include <cstdlib>
 
 #define LABEL_FILE_PATH "../MNIST_DATA/MNISTnumLabels5000_balanced.txt"
 #define IMG_FILE_PATH "../MNIST_DATA/MNISTnumImages5000_balanced.txt"
