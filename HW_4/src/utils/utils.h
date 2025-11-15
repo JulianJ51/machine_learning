@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <cmath>
 #include <iterator>
+#include <math.h>
 
 #define LABEL_FILE_PATH "../MNIST_DATA/MNISTnumLabels5000_balanced.txt"
 #define IMG_FILE_PATH "../MNIST_DATA/MNISTnumImages5000_balanced.txt"

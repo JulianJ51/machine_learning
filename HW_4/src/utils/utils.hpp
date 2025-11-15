@@ -91,18 +91,44 @@ void dump_1Dvec(const std::vector<T>& vec) {
     return;
 }
 
+#include <math.h>
+
 double sigmoid_activation(double u) {
-    return 1 / (1 + exp(u));
+    // Numerically safe sigmoid
+    if (u > 40) return 1.0;
+    if (u < -40) return 0.0;
+    return 1.0 / (1.0 + exp(-u));
 }
 
 double sigmoid_derivative(double u) {
-    return (exp(-u) / (pow(1 + exp(-u), 2)));
-}
+    // Use σ(u) * (1 - σ(u))
+    double s;
+    if (u > 40) return 0.0;          // derivative ~0 near saturation
+    else if (u < -40) return 0.0;     // derivative ~0 near saturation
+    else s = 1.0 / (1.0 + exp(-u));
 
-double tanh_derivative(double u) {
-    return (1 - pow(tanh(u), 2));
+    return s * (1.0 - s);
 }
 
 double tanh(double u) {
-    return ((exp(u) - exp(-u)) / exp(u) + exp(-u));
+    // Numerically safe tanh
+    if (u > 20) return 1.0;
+    if (u < -20) return -1.0;
+
+    double e1 = exp(u);
+    double e2 = exp(-u);
+    return (e1 - e2) / (e1 + e2);
+}
+
+double tanh_derivative(double u) {
+    // derivative = 1 - tanh(u)^2
+    double t;
+    if (u > 20) return 0.0;       // saturated
+    if (u < -20) return 0.0;      // saturated
+
+    double e1 = exp(u);
+    double e2 = exp(-u);
+    t = (e1 - e2) / (e1 + e2);
+
+    return 1.0 - (t * t);
 }
